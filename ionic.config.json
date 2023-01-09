@@ -1,0 +1,7 @@
+{
+  "name": "migracionProj",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

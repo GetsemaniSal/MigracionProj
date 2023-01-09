@@ -1,0 +1,41 @@
+
+  <ion-content>
+  <div class="a-inicio-sesion">
+    <button (click)="dimiss()" class="cerrar"></button>
+
+    <div class="logo-sev"></div>
+  <div class="tipo-cuenta">
+    Ingresa con tus <br><strong>datos de SIPSE </strong>
+  </div>
+  <div class="formulario-login">
+    <label for="usuario">Usuario</label>
+    <div class="input-login">
+<ion-input 
+    type="text" 
+    [(ngModel)]="login.usuario"
+    placeholder="Escribe tu nombre de usuario"
+    (keyup)="onEnterValidate($event)"
+    id="usuario"
+    class="input-login-usuario">
+  
+  </ion-input>
+      </div>
+
+      <label for="password">Password</label>
+      <div class="area-input-login">
+        <ion-input 
+        type="password" 
+        [(ngModel)]="login.password"
+        placeholder="Escribe tu contraseña"
+        (keyup)="onEnterValidate($event)"
+        id="password"
+        >
+
+      </ion-input>
+
+      </div>
+  </div>
+  </div>
+
+
+  </ion-content>
