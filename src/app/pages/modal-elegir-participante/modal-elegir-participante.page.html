@@ -1,9 +1,66 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>modal-elegirParticipante</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content padding>
+  <div class="modal-content">
+    <button (click)="dismiss()" ion-button icon-only clear color="titulo-primario" class="close-modal">
+      <ion-icon name="close"></ion-icon>
+    </button>
 
-<ion-content>
 
+      <div class="ingresar-curp">
+          <div class="titulo-modal">Asignar cargo</div>
+          <p>Ingresa la CURP del tutor</p>
+            <ion-grid>
+              <ion-row>
+                <ion-col class="col-input">
+                <form [formGroup]="form">
+                  <ion-item no-lines class="curp">
+                    <ion-input placeholder="CURP" clearInput autofocus formControlName="curp" [(ngModel)]="buscar.Curp1"></ion-input>
+                    <button item-end ion-button color="fondo-oscuro" class="button-input" (click)="BuscarTutor()">Consultar</button>
+                  </ion-item>
+                </form>
+                <!--div class="anotacion">Cotejaremos el dato con la información de RENAPO</div>
+                <div *ngIf="inputCURPValida">El formato de la CURP no es válido</div-->
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+            <div class="respuesta-curp">
+              <div class="usuario-encontrado">
+                <p>Información encontrada dentro del Plantel Escolar</p>
+                <div class="usuario-curp" [ngClass]="elegido" (click)="SeleccionarTutordelCurp()" >
+                  <div class="usuario-nombre">{{Tutor.busqueda.Nombre}} {{Tutor.busqueda.ApellidoPaterno}} {{Tutor.busqueda.ApellidoMaterno}}</div>
+                  <div class="usuario-domicilio">{{Tutor.busqueda.Domicilio}}</div>
+                  <div class="usuario-colonia">{{Tutor.busqueda.Colonia}}</div>
+                  <div class="usuario-localidad-municipio">{{Tutor.busqueda.Localidad}}, {{ Tutor.busqueda.Municipio}}</div>
+                  <div class="usuario-telefono">{{Tutor.busqueda.Telefono}}</div>
+                </div>
+              </div>
+              <div class="usuario-no-encontrado"*ngIf="mensaje" >
+                <p>No se encuentra el <strong>Curp</strong>. Debe registrarse en el Sistema de Control Escolar</p>
+              </div>
+            </div>
+        </div>
+        <button ion-button type="submit" block (click)="AgregarIntegranteMesa()"[disabled]="!isEnabled"class="boton-modal-bottom">Agregar</button>
+        <!--div class="item item-input-inset"></div>
+        <ion-list>
+            <ion-label>
+                <ion-input type="text" placeholder="Ingrese Curp" formControlName="curp" [(ngModel)]="buscar.Curp1"  >
+                </ion-input>
+                <button ion-button clear type="submit" (click)="BuscarTutor()" >Buscar</button>
+            </ion-label>
+            <ion-item>
+                <ion-option >
+                    <h2>{{Tutor.busqueda.Nombre}} {{Tutor.busqueda.ApellidoPaterno}} {{Tutor.busqueda.ApellidoMaterno}}</h2>
+                    <p> {{Tutor.busqueda.Domicilio}} </p>
+                    <p>{{Tutor.busqueda.Colonia}}</p>
+                    <p>{{Tutor.busqueda.Localidad}} {{ Tutor.busqueda.Municipio}}</p>
+                    <p>{{Tutor.busqueda.Telefono}}</p>
+                </ion-option>
+            </ion-item>
+            <ion-item class="mensaje" *ngIf="mensaje">
+                No se encuentra el <strong>Curp</strong> registrarse en Control Escolar
+            </ion-item>
+            <button ion-button type="submit" block (click)="AgregarIntegranteMesa()" [disabled]="!form.valid">Agregar</button>
+        </ion-list-->
+    <!--<ion-searchbar placeholder="ingrese el Curp" [(ngModel)]="queryText" (ionInput)="BuscarTutor($event)" debounce="250">
+    </ion-searchbar>-->
+  </div>
 </ion-content>

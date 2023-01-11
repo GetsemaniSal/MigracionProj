@@ -1,9 +1,28 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>conclusion-asociacion</ion-title>
-  </ion-toolbar>
+
+  <ion-navbar>
+  </ion-navbar>
+
 </ion-header>
 
-<ion-content>
 
+<ion-content padding>
+  <div class="titulo-pagina">Concluir proceso</div>
+  <div class="mensaje-concluir-proceso">
+      <p>Estás a punto de terminar, puedes concluir el proceso si has revisado que todos los datos son correctos,
+          también puedes regresar y confirmarlo.</p>
+         
+      <!--
+          <button ion-button ion-button secondary (click)="curapf()">Crear Asociación</button>
+      <button ion-button ion-button secondary (click)="numRegistro()">Crear Asociación</button>
+      -->
+      <button ion-button ion-button secondary (click)="curapf()">Finalizar registro</button>
+      <!-- Mostrar mensaje después de que se haya creado la asociación -->
+      <div  class="mensaje-proceso-concluido" *ngIf="mensajeFinal" >
+          <img src="../assets/imgs/concluir.svg" alt="Asociación Creada">
+          <p>La asociación ha sido creada exitosamente</p>
+          <button ion-button ion-button secondary (click)=inicio()>Ir a inicio</button>
+
+      </div>
+  </div>
 </ion-content>

@@ -1,9 +1,62 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>datos-asamblea</ion-title>
-  </ion-toolbar>
+
+  <ion-navbar>
+  </ion-navbar>
+
 </ion-header>
 
-<ion-content>
 
+<ion-content padding>
+  <div class="titulo-pagina">Datos de la Asamblea</div>
+  <div class="ancho-maximo">
+      <div class="info-pagina">Ingresa la información relativa a la convocatoria y asamblea. </div>
+      <form [formGroup]="form">
+          <div class="info-convocatoria">
+              <div class="pregunta">¿En qué fecha emitió la convocatoria la escuela?</div>
+              <ion-item>
+                  <ion-label floating>Seleccione</ion-label>
+                  <ion-datetime displayFormat="DD MMMM YYYY" min="2016" max="2024-10-31" [(ngModel)]="eventmes"
+                      doneText="Aceptar" cancelText="Cancelar" formControlName="FechaConvocatoria"></ion-datetime>
+              </ion-item>
+              <div class="pregunta">¿A qué hora se citó a las Madres y Padres de Familia para realizar la Asamblea?
+              </div>
+              <ion-item>
+                  <ion-label floating>Seleccione</ion-label>
+                  <ion-datetime displayFormat="h:mm A" pickerFormat="h  A" [(ngModel)]="eventtime" doneText="Aceptar"
+                      cancelText="Cancelar" formControlName="HoraInicio"></ion-datetime>
+              </ion-item>
+          </div>
+          <div class="info-asamblea">
+              <div class="pregunta">¿Qué día se realizó la Asamblea?</div>
+              <ion-item>
+                  <ion-label floating>Seleccione</ion-label>
+                  <ion-datetime displayFormat="DD MMMM YYYY" min="2016" max="2024-12-31" [(ngModel)]="fechaAsamblea"
+                      doneText="Aceptar" cancelText="Cancelar" formControlName="FechaAsamblea"></ion-datetime>
+              </ion-item>
+              <div class="pregunta">De los <strong>{{CentroTrabajo.TotalPadres}}</strong> madres/padres de familia
+                  inscritos en
+                  la matrícula del plantel
+                  ¿Cuántos asistieron a la Asamblea?</div>
+              <div class="area-input">
+                  <input type="number" [(ngModel)]="asistentes" (blur)="calcularPadres()" formControlName="Quorum"
+                      [disabled]="!isenabled"> <span>Asistentes</span>
+              </div>
+              <div class="sin-quorum" *ngIf="mensajeQuorum"> Debido a que no se contó con el quórum legal (50% más uno
+                  de las madres y padres inscritos en la matrícula general) y de acuerdo a la hora en que se citó a las Madres y Padres de Familia, la asamblea debió dar inicio a las 
+                  <strong>8:30 hrs.</strong>
+              </div>
+              <div class="pregunta">¿Cuántas propuestas se registraron para elegir a los miembros de la Mesa
+                  Directiva?</div>
+              <div class="area-input">
+                  <input type="text" [(ngModel)]="propuestas" (blur)="casa"
+                      formControlName="Propuestas" /><span>Propuestas</span>
+              </div>
+          </div>
+          <div class="area-botones-continuar">
+              <button ion-button ion-button secondary float-right icon-end (click)="agregarDatos()"
+                  [disabled]="!form.valid">Continuar
+                  <ion-icon name="arrow-forward"></ion-icon></button>
+          </div>
+      </form>
+  </div>
 </ion-content>

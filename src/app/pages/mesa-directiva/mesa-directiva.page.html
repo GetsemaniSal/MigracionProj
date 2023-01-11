@@ -1,9 +1,81 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>mesa-directiva</ion-title>
-  </ion-toolbar>
+
+  <ion-navbar>
+  </ion-navbar>
+
 </ion-header>
 
-<ion-content>
 
+<ion-content padding>
+  <div class="titulo-pagina">Mesa Directiva</div>
+  <div class="info-pagina">Selecciona cada uno de los miembros de la Mesa Directiva...</div>
+  <ion-grid>
+      <ng-container *ngFor="let psdte of Catalogo.Cargo.Directiva">
+          <ion-row align-items-center justify-content-center *ngIf="psdte.Puesto=='Presidente'">
+              <ion-col>&nbsp;</ion-col>
+              <ion-col text-center>
+                  <div class="integrante-mesa"  *ngIf= "psdte.Integrante">
+                      <a [inlineSVG]="'../assets/imgs/quitar-cargo.svg'" [cacheSVG]="false" class="eliminar-cargo"
+                      (click)="confirmarEliminacion(psdte)"></a>
+                      <a [inlineSVG]="ImagenGen(psdte.Integrante.Ultimo())" [cacheSVG]="false" class="integrante presidente"
+                      ></a>
+                      <a 
+                      *ngIf="psdte.Integrante.Ultimo()"
+                      href="javascript:;" 
+                      class="nombre"
+                      (click)="InfoTutor(psdte.Integrante.Ultimo(),psdte.Puesto)">
+                      {{psdte.Integrante.Ultimo().Nombre}}
+                  </a>
+                  <span 
+                          class="nombre"
+                          *ngIf="!psdte.Integrante.Ultimo()">
+                              No se encontró información del integrante.
+                      </span>
+                      <div class="cargo">{{psdte.Puesto}}</div>
+                  </div>
+                  <div class="integrante-mesa" *ngIf= "!psdte.Integrante">
+                      <a [inlineSVG]="'../assets/imgs/avatar-neutro.svg'" [cacheSVG]="false" class="integrante"
+                      (click)="BuscarIntegrante(psdte)"></a>
+                      <a href="javascript:;" class="nombre"></a>
+                      <div class="cargo">{{psdte.Puesto}}</div>
+                    </div>
+              </ion-col>
+              <ion-col>&nbsp;</ion-col>
+          </ion-row>
+      </ng-container>
+      <ion-row justify-content-center >
+          <ng-container *ngFor="let psdte of Catalogo.Cargo.Directiva">
+              <ion-col text-center *ngIf="psdte.Puesto!='Presidente'" col-6 col-md-4 col-lg-2>
+                  <div class="integrante-mesa" *ngIf="psdte.Integrante">
+                      <a [inlineSVG]="'../assets/imgs/quitar-cargo.svg'" [cacheSVG]="false" class="eliminar-cargo"
+                      (click)="confirmarEliminacion(psdte)"></a>
+                      <a [inlineSVG]="ImagenGen(psdte.Integrante.Ultimo())" [cacheSVG]="false" class="integrante vicepresidente"
+                      ></a>
+                      <a
+                      *ngIf="psdte.Integrante.Ultimo()" 
+                      href="javascript:;" 
+                      class="nombre"
+                      (click)="InfoTutor(psdte.Integrante.Ultimo(),psdte.Puesto)">
+                      {{psdte.Integrante.Ultimo().Nombre}}
+                  </a>
+                  <span
+                      class="nombre"
+                      *ngIf="!psdte.Integrante.Ultimo()">
+                      No se encontró información del integrante.
+                  </span>
+                      <div class="cargo">{{psdte.Puesto}}</div>
+                  </div>
+                  <div class="integrante-mesa" *ngIf= "!psdte.Integrante">
+                      <a [inlineSVG]="'../assets/imgs/avatar-neutro.svg'" [cacheSVG]="false" class="integrante"
+                      (click)="BuscarIntegrante(psdte)"></a>
+                      <a href="javascript:;" class="nombre"></a>
+                      <div class="cargo">{{psdte.Puesto}}</div>
+                    </div>
+              </ion-col>
+          </ng-container>
+      </ion-row>
+      
+  </ion-grid>
+  <button ion-button ion-button secondary float-right icon-end (click)="Traer()">Continuar
+      <ion-icon name="arrow-forward"></ion-icon></button>
 </ion-content>

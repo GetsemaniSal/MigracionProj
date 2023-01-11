@@ -1,9 +1,90 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>mesa-debates</ion-title>
-  </ion-toolbar>
+
+  <ion-navbar>
+  </ion-navbar>
+
 </ion-header>
 
-<ion-content>
 
+<ion-content padding>
+  <div class="titulo-pagina">Mesa de Debates</div>
+  <div class="ancho-maximo">
+    <div class="info-pagina">Selecciona cada uno de los miembros de la Mesa de Debates. El mínimo de integrantes debe ser igual o mayor a 3.</div>
+    <ion-grid >
+        <ng-container *ngFor="let pdte of Catalogo.Cargo.Debate">
+            <ion-row align-items-center justify-content-center *ngIf="pdte.Puesto=='Presidente'">
+                <ion-col>&nbsp;</ion-col>
+                <ion-col text-center>
+                    <div class="integrante-mesa" *ngIf= "pdte.Integrante">
+                        <a [inlineSVG]="'assets/imgs/quitar-cargo.svg'" [cacheSVG]="false" class="eliminar-cargo"
+                            (click)="confirmarAlert(pdte)"></a>
+                        <a [inlineSVG]="ImagenGenero(pdte.Integrante.Ultimo())" [cacheSVG]="false" class="integrante presidente"></a>
+                        <a
+                            *ngIf="pdte.Integrante.Ultimo()"
+                            href="javascript:;"
+                            class="nombre"
+                            (click)="DatosTutor(pdte.Integrante.Ultimo())">
+                            {{pdte.Integrante.Ultimo().Nombre}}
+                            {{pdte.Integrante.Ultimo().ApellidoPaterno}}
+                            {{pdte.Integrante.Ultimo().ApellidoMaterno}}
+                          </a>
+                        <span
+                            class="nombre"
+                            *ngIf="!pdte.Integrante.Ultimo()">
+                                No se encontró información del integrante.
+                        </span>
+                        <div class="cargo">{{pdte.Puesto}}</div>
+                    </div>
+                    <div class="integrante-mesa" *ngIf= "!pdte.Integrante">
+                        <a  [inlineSVG]="'assets/imgs/avatar-neutro.svg'" [cacheSVG]="false" class="integrante"
+                        (click)="buscarIntegrante(pdte)" ></a>
+                        <a href="javascript:;" class="nombre"></a>
+                        <div class="cargo">{{pdte.Puesto}}</div>
+                      </div>
+                </ion-col>
+
+                <ion-col>&nbsp;</ion-col>
+            </ion-row>
+        </ng-container>
+        <ion-row justify-content-center>
+            <ng-container *ngFor="let pdte of Catalogo.Cargo.Debate">
+                <ion-col text-center  *ngIf="pdte.Puesto!='Presidente'" col-6 col-md-4 col-lg-2>
+                    <div class="integrante-mesa" *ngIf= "pdte.Integrante">
+                        <a [inlineSVG]="'assets/imgs/quitar-cargo.svg'" [cacheSVG]="false" class="eliminar-cargo"
+                        (click)="confirmarAlert(pdte)"></a>
+
+                        <a [inlineSVG]="ImagenGenero(pdte.Integrante.Ultimo())" [cacheSVG]="false" class="integrante secretario"
+                        ></a>
+                        <a
+                            *ngIf="pdte.Integrante.Ultimo()"
+                            href="javascript:;"
+                            class="nombre"
+                            (click)="DatosTutor(pdte.Integrante.Ultimo(),pdte.Puesto)">
+                                {{pdte.Integrante.Ultimo().Nombre}}
+                                {{pdte.Integrante.Ultimo().ApellidoPaterno}}
+                                {{pdte.Integrante.Ultimo().ApellidoMaterno}}
+
+                        </a>
+                        <span
+                            class="nombre"
+                            *ngIf="!pdte.Integrante.Ultimo()">
+                                No se encontró información del integrante.
+                        </span>
+                        <div class="cargo">{{pdte.Puesto}}</div>
+                    </div>
+                    <div class="integrante-mesa" *ngIf= "!pdte.Integrante">
+                        <a [inlineSVG]="'assets/imgs/avatar-neutro.svg'" [cacheSVG]="false" class="integrante"
+                        (click)="buscarIntegrante(pdte)"></a>
+                        <a href="javascript:;" class="nombre"></a>
+                        <div class="cargo">{{pdte.Puesto}}</div>
+                      </div>
+              </ion-col>
+            </ng-container>
+        </ion-row >
+    </ion-grid>
+    <div class="area-botones-continuar">
+        <button ion-button ion-button secondary float-right icon-end (click)="abrirMesaDirectiva()">Continuar <ion-icon
+                name="arrow-forward"></ion-icon></button>
+    </div>
+  </div>
 </ion-content>

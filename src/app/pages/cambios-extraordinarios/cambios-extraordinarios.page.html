@@ -1,9 +1,296 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>cambios-extraordinarios</ion-title>
-  </ion-toolbar>
+	<ion-navbar>
+	</ion-navbar>
 </ion-header>
 
-<ion-content>
 
+<ion-content padding>
+	<div class="titulo-pagina">Realizar cambio extraordinario</div>
+	<div class="ancho-maximo">
+		<div class="info-asamblea">
+			<form [formGroup]="form">
+				<div>
+					<div class="pregunta">Ingresa la fecha de la Asamblea </div>
+
+					<ion-item>
+						<ion-label floating>Seleccionar</ion-label>
+						<ion-datetime displayFormat="DD MMMM YYYY" min="2016" max="2020-10-31" [(ngModel)]="fechaAsamblea" doneText="Aceptar"
+						 cancelText="Cancelar" formControlName="FechaAsamblea"></ion-datetime>
+					</ion-item>
+
+					<div class="pregunta">Elige la hora de inicio y término </div>
+					<ion-row>
+						<ion-col col-2>
+							<ion-item>
+								<ion-label floating>inicio</ion-label>
+								<ion-datetime displayFormat="h:mm A" pickerFormat="h  A" [(ngModel)]="eventinicio" doneText="Aceptar" cancelText="Cancelar"
+								 formControlName="HoraInicioAsamblea"></ion-datetime>
+							</ion-item>
+						</ion-col>
+						<ion-col col-2>
+							<ion-item>
+								<ion-label floating>término</ion-label>
+								<ion-datetime displayFormat="h:mm A" pickerFormat="h  A" [(ngModel)]="eventtermino" doneText="Aceptar" cancelText="Cancelar"
+								 formControlName="HoraTerminoAsamblea"></ion-datetime>
+							</ion-item>
+						</ion-col>
+					</ion-row>
+
+
+					<div class="pregunta">Elige los miembros de la mesa directiva asistentes a la Asamblea </div>
+					<div class="area-boton-asistentes">
+						<button ion-button clear (click)="ElegirMiembro()">
+							Elegir miembros
+						</button>
+					</div>
+
+					<div class="pregunta">Total de votos </div>
+					<ion-item>
+						<ion-grid>
+							<ion-row>
+								<ion-col col-2>
+									<div class="area-input">
+										<input type="number" [(ngModel)]="votoFavor" formControlName="VotosFavor"> <span>A favor </span>
+									</div>
+								</ion-col>
+								<ion-col col-2>
+									<div class="area-input">
+										<input type="number" [(ngModel)]="votoContra" formControlName="VotosContra"><span>En contra</span>
+									</div>
+								</ion-col>
+							</ion-row>
+						</ion-grid>
+					</ion-item>
+				</div>
+			</form>
+		</div>
+		<div>
+
+		<div class="mesa-directiva-actual">
+			<div>
+				<h5 text-center>Mesa directiva actual</h5>
+			</div>
+
+			<ion-grid>
+				<ion-row>
+					<ion-col>
+						<div>
+							<ng-container *ngFor="let psdte of Catalogo.Cargo.Directiva">
+								<ion-row align-items-center justify-content: center *ngIf="psdte.Puesto=='Presidente'">
+									<ion-col text-center>
+										<div class="integrante-mesa" *ngIf="psdte.Integrante">
+											<a [inlineSVG]="'../assets/imgs/quitar-cargo.svg'" [cacheSVG]="false" class="eliminar-cargo" (click)="confirmarEliminacion(psdte)"></a>
+											<a [inlineSVG]="ImagenGen(psdte.Integrante.Ultimo())" [cacheSVG]="false" class="integrante presidente"></a>
+											<a *ngIf="psdte.Integrante.Ultimo()" href="javascript:;" class="nombre">
+												{{psdte.Integrante.Ultimo().Nombre}}
+											</a>
+											<span class="nombre" *ngIf="!psdte.Integrante.Ultimo()">
+												No se encontró información del integrante.
+											</span>
+											<div class="cargo">{{psdte.Puesto}}</div>
+										</div>
+										<div class="integrante-mesa" *ngIf="!psdte.Integrante">
+											<a [inlineSVG]="'../assets/imgs/avatar-neutro.svg'" [cacheSVG]="false" class="integrante" (click)="GenerarCambio(psdte)"></a>
+											<a href="javascript:;" class="nombre"></a>
+											<div class="cargo">{{psdte.Puesto}}</div>
+										</div>
+									</ion-col>
+								</ion-row>
+							</ng-container>
+						</div>
+						<div>
+							<ion-row align-items-center justify-content-center>
+								<ng-container *ngFor="let psdte of Catalogo.Cargo.Directiva">
+									<ion-col text-center *ngIf="psdte.Puesto=='Vicepresidente'">
+										<div class="integrante-mesa" *ngIf="psdte.Integrante">
+											<a [inlineSVG]="'../assets/imgs/quitar-cargo.svg'" [cacheSVG]="false" class="eliminar-cargo" (click)="confirmarEliminacion(psdte)"></a>
+											<a [inlineSVG]="ImagenGen(psdte.Integrante.Ultimo())" [cacheSVG]="false" class="integrante vicepresidente"></a>
+											<a *ngIf="psdte.Integrante.Ultimo()" href="javascript:;" class="nombre">
+												{{psdte.Integrante.Ultimo().Nombre}}
+											</a>
+											<span class="nombre" *ngIf="!psdte.Integrante.Ultimo()">
+												No se encontró información del integrante.
+											</span>
+											<div class="cargo">{{psdte.Puesto}}</div>
+										</div>
+										<div class="integrante-mesa" *ngIf="!psdte.Integrante">
+											<a [inlineSVG]="'../assets/imgs/avatar-neutro.svg'" [cacheSVG]="false" class="integrante" (click)="GenerarCambio(psdte)"></a>
+											<a href="javascript:;" class="nombre"></a>
+											<div class="cargo">{{psdte.Puesto}}</div>
+										</div>
+									</ion-col>
+									<ion-col text-center *ngIf="psdte.Puesto=='Secretario'">
+										<div class="integrante-mesa" *ngIf="psdte.Integrante">
+											<a [inlineSVG]="'../assets/imgs/quitar-cargo.svg'" [cacheSVG]="false" class="eliminar-cargo" (click)="confirmarEliminacion(psdte)"></a>
+											<a [inlineSVG]="ImagenGen(psdte.Integrante.Ultimo())" [cacheSVG]="false" class="integrante vicepresidente"></a>
+											<a *ngIf="psdte.Integrante.Ultimo()" href="javascript:;" class="nombre">
+												{{psdte.Integrante.Ultimo().Nombre}}
+											</a>
+											<span class="nombre" *ngIf="!psdte.Integrante.Ultimo()">
+												No se encontró información del integrante.
+											</span>
+											<div class="cargo">{{psdte.Puesto}}</div>
+										</div>
+										<div class="integrante-mesa" *ngIf="!psdte.Integrante">
+											<a [inlineSVG]="'../assets/imgs/avatar-neutro.svg'" [cacheSVG]="false" class="integrante" (click)="GenerarCambio(psdte)"></a>
+											<a href="javascript:;" class="nombre"></a>
+											<div class="cargo">{{psdte.Puesto}}</div>
+										</div>
+									</ion-col>
+									<ion-col text-center *ngIf="psdte.Puesto=='Tesorero'">
+										<div class="integrante-mesa" *ngIf="psdte.Integrante">
+											<a [inlineSVG]="'../assets/imgs/quitar-cargo.svg'" [cacheSVG]="false" class="eliminar-cargo" (click)="confirmarEliminacion(psdte)"></a>
+											<a [inlineSVG]="ImagenGen(psdte.Integrante.Ultimo())" [cacheSVG]="false" class="integrante vicepresidente"></a>
+											<a *ngIf="psdte.Integrante.Ultimo()" href="javascript:;" class="nombre">
+												{{psdte.Integrante.Ultimo().Nombre}}
+											</a>
+											<span class="nombre" *ngIf="!psdte.Integrante.Ultimo()">
+												No se encontró información del integrante.
+											</span>
+											<div class="cargo">{{psdte.Puesto}}</div>
+										</div>
+										<div class="integrante-mesa" *ngIf="!psdte.Integrante">
+											<a [inlineSVG]="'../assets/imgs/avatar-neutro.svg'" [cacheSVG]="false" class="integrante" (click)="GenerarCambio(psdte)"></a>
+											<a href="javascript:;" class="nombre"></a>
+											<div class="cargo">{{psdte.Puesto}}</div>
+										</div>
+									</ion-col>
+								</ng-container>
+							</ion-row>
+
+						</div>
+					</ion-col>
+					<ion-col class="col-vocales">
+						<div>
+							<ion-row justify-content-center>
+								<ng-container *ngFor="let psdte of Catalogo.Cargo.Directiva">
+									<ion-col text-center *ngIf="psdte.Puesto=='Vocal 1'">
+										<div class="integrante-mesa" *ngIf="psdte.Integrante">
+											<a [inlineSVG]="'../assets/imgs/quitar-cargo.svg'" [cacheSVG]="false" class="eliminar-cargo" (click)="confirmarEliminacion(psdte)"></a>
+											<a [inlineSVG]="ImagenGen(psdte.Integrante.Ultimo())" [cacheSVG]="false" class="integrante vicepresidente"></a>
+											<a *ngIf="psdte.Integrante.Ultimo()" href="javascript:;" class="nombre">
+												{{psdte.Integrante.Ultimo().Nombre}}
+											</a>
+											<span class="nombre" *ngIf="!psdte.Integrante.Ultimo()">
+												No se encontró información del integrante.
+											</span>
+											<div class="cargo">{{psdte.Puesto}}</div>
+										</div>
+										<div class="integrante-mesa" *ngIf="!psdte.Integrante">
+											<a [inlineSVG]="'../assets/imgs/avatar-neutro.svg'" [cacheSVG]="false" class="integrante" (click)="GenerarCambio(psdte)"></a>
+											<a href="javascript:;" class="nombre"></a>
+											<div class="cargo">{{psdte.Puesto}}</div>
+										</div>
+									</ion-col>
+									<ion-col text-center *ngIf="psdte.Puesto=='Vocal 2'">
+										<div class="integrante-mesa" *ngIf="psdte.Integrante">
+											<a [inlineSVG]="'../assets/imgs/quitar-cargo.svg'" [cacheSVG]="false" class="eliminar-cargo" (click)="confirmarEliminacion(psdte)"></a>
+											<a [inlineSVG]="ImagenGen(psdte.Integrante.Ultimo())" [cacheSVG]="false" class="integrante vicepresidente"></a>
+											<a *ngIf="psdte.Integrante.Ultimo()" href="javascript:;" class="nombre">
+												{{psdte.Integrante.Ultimo().Nombre}}
+											</a>
+											<span class="nombre" *ngIf="!psdte.Integrante.Ultimo()">
+												No se encontró información del integrante.
+											</span>
+											<div class="cargo">{{psdte.Puesto}}</div>
+										</div>
+										<div class="integrante-mesa" *ngIf="!psdte.Integrante">
+											<a [inlineSVG]="'../assets/imgs/avatar-neutro.svg'" [cacheSVG]="false" class="integrante" (click)="GenerarCambio(psdte)"></a>
+											<a href="javascript:;" class="nombre"></a>
+											<div class="cargo">{{psdte.Puesto}}</div>
+										</div>
+									</ion-col>
+									<ion-col text-center *ngIf="psdte.Puesto=='Vocal 3'">
+										<div class="integrante-mesa" *ngIf="psdte.Integrante">
+											<a [inlineSVG]="'../assets/imgs/quitar-cargo.svg'" [cacheSVG]="false" class="eliminar-cargo" (click)="confirmarEliminacion(psdte)"></a>
+											<a [inlineSVG]="ImagenGen(psdte.Integrante.Ultimo())" [cacheSVG]="false" class="integrante vicepresidente"></a>
+											<a *ngIf="psdte.Integrante.Ultimo()" href="javascript:;" class="nombre">
+												{{psdte.Integrante.Ultimo().Nombre}}
+											</a>
+											<span class="nombre" *ngIf="!psdte.Integrante.Ultimo()">
+												No se encontró información del integrante.
+											</span>
+											<div class="cargo">{{psdte.Puesto}}</div>
+										</div>
+										<div class="integrante-mesa" *ngIf="!psdte.Integrante">
+											<a [inlineSVG]="'../assets/imgs/avatar-neutro.svg'" [cacheSVG]="false" class="integrante" (click)="GenerarCambio(psdte)"></a>
+											<a href="javascript:;" class="nombre"></a>
+											<div class="cargo">{{psdte.Puesto}}</div>
+										</div>
+									</ion-col>
+								</ng-container>
+							</ion-row>
+						</div>
+						<div>
+							<ion-row justify-content-center>
+								<ng-container *ngFor="let psdte of Catalogo.Cargo.Directiva">
+									<ion-col text-center *ngIf="psdte.Puesto=='Vocal 4'">
+										<div class="integrante-mesa" *ngIf="psdte.Integrante">
+											<a [inlineSVG]="'../assets/imgs/quitar-cargo.svg'" [cacheSVG]="false" class="eliminar-cargo" (click)="confirmarEliminacion(psdte)"></a>
+											<a [inlineSVG]="ImagenGen(psdte.Integrante.Ultimo())" [cacheSVG]="false" class="integrante vicepresidente"></a>
+											<a *ngIf="psdte.Integrante.Ultimo()" href="javascript:;" class="nombre">
+												{{psdte.Integrante.Ultimo().Nombre}}
+											</a>
+											<span class="nombre" *ngIf="!psdte.Integrante.Ultimo()">
+												No se encontró información del integrante.
+											</span>
+											<div class="cargo">{{psdte.Puesto}}</div>
+										</div>
+										<div class="integrante-mesa" *ngIf="!psdte.Integrante">
+											<a [inlineSVG]="'../assets/imgs/avatar-neutro.svg'" [cacheSVG]="false" class="integrante" (click)="GenerarCambio(psdte)"></a>
+											<a href="javascript:;" class="nombre"></a>
+											<div class="cargo">{{psdte.Puesto}}</div>
+										</div>
+									</ion-col>
+									<ion-col text-center *ngIf="psdte.Puesto=='Vocal 5'">
+										<div class="integrante-mesa" *ngIf="psdte.Integrante">
+											<a [inlineSVG]="'../assets/imgs/quitar-cargo.svg'" [cacheSVG]="false" class="eliminar-cargo" (click)="confirmarEliminacion(psdte)"></a>
+											<a [inlineSVG]="ImagenGen(psdte.Integrante.Ultimo())" [cacheSVG]="false" class="integrante vicepresidente"></a>
+											<a *ngIf="psdte.Integrante.Ultimo()" href="javascript:;" class="nombre">
+												{{psdte.Integrante.Ultimo().Nombre}}
+											</a>
+											<span class="nombre" *ngIf="!psdte.Integrante.Ultimo()">
+												No se encontró información del integrante.
+											</span>
+											<div class="cargo">{{psdte.Puesto}}</div>
+										</div>
+										<div class="integrante-mesa" *ngIf="!psdte.Integrante">
+											<a [inlineSVG]="'../assets/imgs/avatar-neutro.svg'" [cacheSVG]="false" class="integrante" (click)="GenerarCambio(psdte)"></a>
+											<a href="javascript:;" class="nombre"></a>
+											<div class="cargo">{{psdte.Puesto}}</div>
+										</div>
+									</ion-col>
+									<ion-col text-center *ngIf="psdte.Puesto=='Vocal 6'">
+										<div class="integrante-mesa" *ngIf="psdte.Integrante">
+											<a [inlineSVG]="'../assets/imgs/quitar-cargo.svg'" [cacheSVG]="false" class="eliminar-cargo" (click)="confirmarEliminacion(psdte)"></a>
+											<a [inlineSVG]="ImagenGen(psdte.Integrante.Ultimo())" [cacheSVG]="false" class="integrante vicepresidente"></a>
+											<a *ngIf="psdte.Integrante.Ultimo()" href="javascript:;" class="nombre">
+												{{psdte.Integrante.Ultimo().Nombre}}
+											</a>
+											<span class="nombre" *ngIf="!psdte.Integrante.Ultimo()">
+												No se encontró información del integrante.
+											</span>
+											<div class="cargo">{{psdte.Puesto}}</div>
+										</div>
+										<div class="integrante-mesa" *ngIf="!psdte.Integrante">
+											<a [inlineSVG]="'../assets/imgs/avatar-neutro.svg'" [cacheSVG]="false" class="integrante" (click)="GenerarCambio(psdte)"></a>
+											<a href="javascript:;" class="nombre"></a>
+											<div class="cargo">{{psdte.Puesto}}</div>
+										</div>
+									</ion-col>
+								</ng-container>
+							</ion-row>
+						</div>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+		</div>
+
+		</div>
+
+		<div>
+			<button ion-button ion-button secondary [disabled]="!form.valid" (click)="agregarDatosCambio()"> Concluir cambio
+				extraordinario</button>
+		</div>
+		</div>
 </ion-content>

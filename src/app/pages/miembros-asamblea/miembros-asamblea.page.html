@@ -1,9 +1,30 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>miembros-asamblea</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content padding>
+  <ion-buttons end>
+      <button ion-button clear (click)="dismiss()">
+          <ion-icon name="close"></ion-icon>
+      </button>
+  </ion-buttons>
 
-<ion-content>
+  <div>
+      <div>Miembros de la Asamblea </div>
+      <div>
+          <ion-list>
+              <ng-container *ngFor="let psdte of Catalogo.Cargo.Directiva">
+                  <ion-item *ngIf="psdte.Integrante">
+                      <ion-label *ngIf="psdte.Integrante.Ultimo()" href="javascript:;" class="nombre">
+                          {{psdte.Integrante.Ultimo().Nombre}} {{psdte.Integrante.Ultimo().ApellidoPaterno}}
+                          {{psdte.Integrante.Ultimo().ApellidoMaterno}}
+                          <p>{{psdte.Integrante.Ultimo().CURP}}</p>
+                      </ion-label>
+                      <ion-checkbox (click)="Asistentes(psdte.Integrante.Ultimo().CURP)"></ion-checkbox>
 
+                  </ion-item>
+                 
+              </ng-container>
+               <button ion-button (click)="agregar()" >Elegir miembros</button>
+               
+          </ion-list>
+
+      </div>
+  </div>
 </ion-content>

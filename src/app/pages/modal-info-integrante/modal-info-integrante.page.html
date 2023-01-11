@@ -1,9 +1,40 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>modal-InfoIntegrante</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
+<ion-content padding text-center  >
+  <!--*ngFor= "let Datos of TutorRegistrado"-->
+  <ion-buttons end>
+      <button ion-button clear (click)="dismiss()">
+          <ion-icon name="close"></ion-icon>
+      </button>
+  </ion-buttons>
+  
+      <ion-list no-lines  >
+          <div>
+              <h2><strong>{{Puesto}}</strong> </h2>
+  
+          </div>
+          <ion-item  >   
+              <h1>{{Tutor.Nombre}} {{Tutor.ApellidoPaterno}} {{Tutor.ApellidoMaterno}}</h1>
+              <p>{{Tutor.CURP}}</p>
+          </ion-item>
+          <ion-item>
+              <p>Correo electrónico</p>
+              <h3>{{Tutor.Correo}}</h3>
+          </ion-item>
+          <ion-item>
+              <p> Teléfono</p>
+              <h3>{{Tutor.Telefono}}</h3>
+          </ion-item>
+          <ion-item>
+              <p>Domicilio</p>
+              <h3>{{Tutor.Domicilio}}</h3>
+          </ion-item>
+          <ion-item>
+              <p> Localidad</p>
+              <h3>{{Tutor.Localidad}}</h3>
+          </ion-item>
+          <ion-item>
+              <p> Municipio</p>
+              <h3>{{Tutor.Municipio}}</h3>
+          </ion-item>
+      </ion-list>
 
 </ion-content>
