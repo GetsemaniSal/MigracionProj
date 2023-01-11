@@ -1,9 +1,34 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>cambios-principal</ion-title>
-  </ion-toolbar>
+
+  <ion-navbar>
+  </ion-navbar>
+
 </ion-header>
 
-<ion-content>
+
+<ion-content padding>
+  <div class="titulo-pagina">Cambios extraordinarios </div>
+
+  <div class="ancho-maximo">
+    <div class="texto-info">Para agregar un tutor en un cambio extraordinario es necesario conocer su CURP</div>
+    <div class="area-boton-cambioextraordinario"> <button ion-button (click)="CambioExtraordinario()"> Hacer un cambio </button> </div>
+    <div class="area-lista-historicoextraordinarios">
+      <div class="titulo-lista-historicoextraordinarios">Histórico de cambios extraordinarios</div>
+      <ion-list class="lista-cambios-extraordinarios">
+          <button ion-item>
+            <span>26 enero 2023</span>
+              Cambio 1
+          </button>
+          <button ion-item>
+            <span>29 enero 2023</span>
+              Cambio 2
+          </button>
+          <button ion-item>
+            <span>01 febrero 2023</span>
+              Cambio 3
+          </button>
+      </ion-list>
+    </div>
+  </div>
 
 </ion-content>

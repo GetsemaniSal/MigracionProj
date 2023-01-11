@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
- import { Platform } from '@ionic/angular';
- import { HomePage } from './home/home.page';
-import {SplashScreen} from '@ionic-native/SplashScreen';
-import { StatusBar } from '@ionic-native/statusBar';
-
-
+import { Platform } from '@ionic/angular';
+import { StatusBar } from '@ionic-native/status-bar';
+import {SplashScreen} from '@ionic-native/splash-screen';
+import { HomePage } from './home/home.page';
  @Component({
    selector: 'app-root',
    templateUrl: 'app.component.html',

@@ -1,9 +1,35 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>asociacion-creada</ion-title>
-  </ion-toolbar>
+
+  <ion-navbar>
+  </ion-navbar>
+
 </ion-header>
 
-<ion-content>
+
+<ion-content padding>
+  <div class="titulo-pagina">Asociación</div>
+
+  <div class="ancho-maximo">
+
+    <div class="integrante-mesa">
+        <span [inlineSVG]="'../assets/imgs/asociacion.svg'" [cacheSVG]="false" class="integrante"></span>
+        <div class="cargo">
+            <h3 text-center>CURAPF <span>DPR/TV/S-9/Z-30/633507/2019-1-24</span></h3>
+        </div>
+    </div>
+
+    <div>
+        <ion-list class="lista-asociacion">
+            <button ion-item (click)="VerActa()">
+                Acta Constitutiva
+            </button>
+            <button ion-item (click)="CambioExtraodinario()">
+                Cambios extraordinarios
+            </button>
+        </ion-list>
+    </div>
+
+
+    </div>
 
 </ion-content>

@@ -1,9 +1,31 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>modal-eliminar</ion-title>
-  </ion-toolbar>
+	<ion-navbar>
+	</ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
+	<div class="modal-content">
+		<button (click)="dismiss()" ion-button icon-only clear color="titulo-primario" class="close-modal">
+			<ion-icon name="close"></ion-icon>
+		</button>
 
+		<div class="ingresar-curp">
+			<div class="titulo-modal"></div>
+			<!--- <p> "Confirma que deseas quitar a " + {{Cargo.Integrante.Ultimo().Nombre}} + " del cargo de " + {{Cargo.Puesto}},</p> -->
+
+			<!--   <div class="respuesta-curp">
+                <div class="usuario-encontrado">
+                  <p>Nuevo Tutor</p>
+                  
+                  </div>
+                </div>
+                <div class="usuario-no-encontrado"*ngIf="mensaje" >
+                  <p>No se encuentra el <strong>Curp</strong>. Debe registrarse en el Sistema de Control Escolar</p>
+                </div>
+              </div>-->
+		</div>
+		<button ion-button type="submit" block (click)="AgregarIntegranteMesa()" [disabled]="!isEnabled"
+			class="boton-modal-bottom">Agregar</button>
+
+	</div>
 </ion-content>

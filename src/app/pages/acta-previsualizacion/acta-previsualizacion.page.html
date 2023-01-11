@@ -1,9 +1,18 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>acta-previsualizacion</ion-title>
-  </ion-toolbar>
+  <ion-navbar>
+  </ion-navbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content padding>
+      <div class="pdf-container">
+              <pdf-viewer [src]="src"
+                          [original-size]="false"
+              ></pdf-viewer>
+            </div>
+<div>
+  <div class="linea"></div>
+  
+  <button ion-button ion-button secondary >Descargar</button>
+</div>
 </ion-content>
+               
