@@ -6,13 +6,11 @@ import {HttpClient} from '@angular/common/http'
 export class AppDataService {
   private usuarioEndPoint: string ='https://auth.sev.gob.mx/basic/centro-trabajo';
 
+  constructor(public http: HttpClient) 
+  {
+  }
 
-  constructor(
-    public http: HttpClient
-) {
-}
-
-public Login(login: any) {
+  public Login(login: any) {
     return this.http.post(this.usuarioEndPoint,login);
     
 }

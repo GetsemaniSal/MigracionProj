@@ -2,7 +2,6 @@ import { importProvidersFrom, NgModule, enableProdMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { IonBackButton, IonicModule, IonicRouteStrategy } from '@ionic/angular';
-import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import {ActaConstitutivaPage}from '../app/pages/acta-constitutiva/acta-constitutiva.page'
 import {ActaPrevisualizacionPage} from '../app/pages/acta-previsualizacion/acta-previsualizacion.page'
@@ -14,14 +13,15 @@ import {ConclusionAsociacionPage} from '../app/pages/conclusion-asociacion/concl
 import {DatosAsambleaPage}from '../app/pages/datos-asamblea/datos-asamblea.page'
 import {LoginPage} from '../app/pages/login/login.page'
 import {MesaDebatesPage} from '../app/pages/mesa-debates/mesa-debates.page'
-import {AppDataService} from '../app/services/app-data/app-data.service'
 import {CatalogoService} from '../app/services/catalogo/catalogo.service'
 import {CentroDeTrabajoService} from '../app/services/centro-de-trabajo/centro-de-trabajo.service'
 import {DatosAsambleaService} from '../app/services/datos-asamblea/datos-asamblea.service'
 import {IntegrantesService} from '../app/services/integrantes/integrantes.service'
 import {TutoresService} from '../app/services/tutores/tutores.service'
-import { DatosCambioService } from './services/datos-cambio/datos-cambio.service';
-import { MomentosPipe } from './pipes/momentos/momentos.pipe';
+import {DatosCambioService } from './services/datos-cambio/datos-cambio.service';
+import {MomentosPipe } from './pipes/momentos/momentos.pipe';
+import {AppDataService } from '../app/services/app-data/app-data.service';
+import { Observable} from 'rxjs/internal/Observable';
 
 enableProdMode();
 

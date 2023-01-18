@@ -1,7 +1,7 @@
 import { Component, Renderer2 } from '@angular/core';
-import { NavController, NavParams, ViewController } from 'ionic-angular';
+import { NavController, NavParams, ViewController} from '@ionic/angular';
 import { AppDataService } from '../../services/app-data/app-data.service';
-import { ToastController } from 'ionic-angular';
+import { ToastController } from '@ionic/angular';
 import { PrincipalPage } from '../principal/principal.page';
 
 /**
@@ -24,7 +24,7 @@ export class LoginPage {
 		private renderer: Renderer2,
 		public navParams: NavParams, 
 		public viewCtrl: ViewController,
-		public data: AppDataProvider,
+		public data: AppDataService,
 		private toastCtrl: ToastController
 	) {
 		this.renderer.addClass(this.viewCtrl.pageRef().nativeElement, "login-modal-view");
@@ -58,7 +58,7 @@ export class LoginPage {
 				if (res.autenticado.valido) {
 					//this.data.AsignarPlantel(res);
 					this.viewCtrl.dismiss({Autenticado:true});
-					this.navCtrl.push(PrincipalPage,{login:this.login,ct:res});
+					this.navCtrl.(PrincipalPage,{login:this.login,ct:res});
 				} else {
 					this.mensaje("El usuario/contraseña no es válido")
 				}
