@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { AppDataService} from '../../services/app-data/app-data.service';
 import { IonicModule, NavController, NavParams, ToastController } from '@ionic/angular';
 import { LoginPageRoutingModule } from './login-routing.module';
-// import { LoginPage } from './login.page';
+import { LoginPage } from './login.page';
 import { PrincipalPage } from '../principal/principal.page';
 
 @NgModule({

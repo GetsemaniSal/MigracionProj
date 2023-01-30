@@ -1,15 +1,11 @@
 import { Component, Renderer2 } from '@angular/core';
-import { NavController, NavParams, ViewController} from '@ionic/angular';
+import { NavController, NavParams,} from '@ionic/angular';
+import { ViewController} from '@ionic/core'
 import { AppDataService } from '../../services/app-data/app-data.service';
 import { ToastController } from '@ionic/angular';
 import { PrincipalPage } from '../principal/principal.page';
+import { LoginPageRoutingModule } from './login-routing.module';
 
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @Component({
 	selector: 'page-login',
@@ -23,7 +19,7 @@ export class LoginPage {
 		public navCtrl: NavController,
 		private renderer: Renderer2,
 		public navParams: NavParams, 
-		public viewCtrl: ViewController,
+		public  viewCtrl: ViewController,
 		public data: AppDataService,
 		private toastCtrl: ToastController
 	) {
